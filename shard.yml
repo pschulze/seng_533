@@ -1,0 +1,20 @@
+name: seng_533
+version: 0.1.0
+
+authors:
+  - Peter Schulze <peter@pschulze.dev>
+
+targets:
+  seng_533:
+    main: src/seng_533.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  flexo:
+    github: pschulze/flexo
+    version: "~> 0.1"
+    
+crystal: 0.32.1
+
+license: MIT
