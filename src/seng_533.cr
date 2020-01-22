@@ -27,4 +27,5 @@ get "/result/:guid" do |env|
   send_file(env, ::File.join [Kemal.config.public_folder, "results/", env.params.url["guid"]])
 end
 
-Kemal.run
+port = ARGV[0]?.try &.to_i?
+Kemal.run port
