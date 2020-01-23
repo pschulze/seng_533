@@ -24,7 +24,18 @@ post "/compare" do |env|
 end
 
 get "/result/:guid" do |env|
-  send_file(env, ::File.join [Kemal.config.public_folder, "results/", env.params.url["guid"]])
+  begin
+    result_file_uuid = UUID.new(env.params.url["guid"])
+  rescue
+    halt env, status_code: 404, response: "Not Found"
+  end
+
+  result_file_path = ::File.join [Kemal.config.public_folder, "results/", result_file_uuid]
+  unless File.exists?(result_file_path)
+    halt env, status_code: 404, response: "Not Found"
+  end
+
+  send_file(env, result_file_path)
 end
 
 port = ARGV[0]?.try &.to_i?
